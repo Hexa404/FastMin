@@ -18,3 +18,7 @@
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Private secrets
+.env
+
