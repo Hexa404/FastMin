@@ -48,6 +48,11 @@ void DisplayManager::showMessage(const std::string& line1, const std::string& li
     setState(DisplayState::STATUS_CONNECTED);
 }
 
+void DisplayManager::showTalkingMessage(const std::string& msg) {
+    _message1 = msg;
+    setState(DisplayState::FACE_TALKING);
+}
+
 void DisplayManager::update() {
     switch (_state) {
         case DisplayState::BOOT:
@@ -153,7 +158,7 @@ void DisplayManager::renderFaceTalkingScreen() {
     }
     
     _display.setCursor(0, 1);
-    _display.print(padString("  << Speaking   ").c_str());
+    _display.print(padString(_message1).c_str());
 }
 
 } // namespace fastmin

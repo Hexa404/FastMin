@@ -59,8 +59,8 @@ bool CoreManager::init() {
         Serial.print("]: ");
         Serial.println(payload.c_str());
 
-        // Make the face react and animate talking
-        CoreManager::getInstance().getDisplay().setState(DisplayState::FACE_TALKING);
+        // Make the face react and animate talking with the received text response
+        CoreManager::getInstance().getDisplay().showTalkingMessage(payload);
     });
 
     Serial.println("FastMin CoreManager initialized.");

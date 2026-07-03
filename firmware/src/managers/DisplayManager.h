@@ -56,6 +56,11 @@ public:
     void showMessage(const std::string& line1, const std::string& line2 = "", const std::string& line3 = "");
 
     /**
+     * @brief Trigger talking state and set the spoken text on the screen.
+     */
+    void showTalkingMessage(const std::string& msg);
+
+    /**
      * @brief Get the state timer for checking durations.
      * @return unsigned long state timer in ms.
      */
