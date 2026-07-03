@@ -8,8 +8,17 @@ CoreManager& CoreManager::getInstance() {
     return instance;
 }
 
+ConfigManager& CoreManager::getConfig() {
+    return _configManager;
+}
+DeviceManager& CoreManager::getDeviceManager() {
+    return _deviceManager;
+}
+
+
 bool CoreManager::init() {
-    // Initial skeleton implementation, logic will be added in subsequent milestones.
+    Serial.begin(115200);
+    Serial.println("FastMin CoreManager initialized.");
     return true;
 }
 
@@ -18,3 +27,4 @@ void CoreManager::update() {
 }
 
 } // namespace fastmin
+

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../managers/ConfigManager.h"
+#include "../managers/DeviceManager.h"
+
 namespace fastmin {
 
 /**
@@ -30,7 +33,22 @@ public:
      */
     void update();
 
+    /**
+     * @brief Access the Configuration Manager instance.
+     * @return ConfigManager& Reference to the config manager.
+     */
+    ConfigManager& getConfig();
+
+    /**
+     * @brief Access the Device Manager instance.
+     * @return DeviceManager& Reference to the device manager.
+     */
+    DeviceManager& getDeviceManager();
+
 private:
+    ConfigManager _configManager;
+    DeviceManager _deviceManager;
+
     // Private constructors & operators to enforce singleton behavior
     CoreManager() = default;
     ~CoreManager() = default;
@@ -39,3 +57,5 @@ private:
 };
 
 } // namespace fastmin
+
+
