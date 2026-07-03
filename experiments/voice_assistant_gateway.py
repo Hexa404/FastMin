@@ -100,7 +100,8 @@ def listen_and_process():
 
             # Speak the reply out loud using macOS built-in TTS (non-blocking)
             try:
-                subprocess.Popen(["say", reply])
+                # Use Indonesian female voice "Damayanti" and set natural reading rate (-r 140)
+                subprocess.Popen(["say", "-v", "Damayanti", "-r", "140", reply])
             except Exception as e:
                 print(f"⚠️ [TTS Error] Gagal memutar suara: {e}")
 
