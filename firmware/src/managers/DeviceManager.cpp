@@ -56,6 +56,14 @@ const DeviceInfo* DeviceManager::find(const std::string& id) const {
     return nullptr;
 }
 
+DeviceInfo* DeviceManager::find(const std::string& id) {
+    auto it = _devices.find(id);
+    if (it != _devices.end()) {
+        return &it->second;
+    }
+    return nullptr;
+}
+
 bool DeviceManager::exists(const std::string& id) const {
     return _devices.find(id) != _devices.end();
 }

@@ -2,6 +2,9 @@
 
 #include "../managers/ConfigManager.h"
 #include "../managers/DeviceManager.h"
+#include "../managers/WifiManager.h"
+#include "../managers/MqttManager.h"
+#include "../managers/DisplayManager.h"
 
 namespace fastmin {
 
@@ -45,9 +48,30 @@ public:
      */
     DeviceManager& getDeviceManager();
 
+    /**
+     * @brief Access the WiFi Manager instance.
+     * @return WifiManager& Reference to the WiFi manager.
+     */
+    WifiManager& getWifi();
+
+    /**
+     * @brief Access the MQTT Manager instance.
+     * @return MqttManager& Reference to the MQTT manager.
+     */
+    MqttManager& getMqtt();
+
+    /**
+     * @brief Access the Display Manager instance.
+     * @return DisplayManager& Reference to the display manager.
+     */
+    DisplayManager& getDisplay();
+
 private:
     ConfigManager _configManager;
     DeviceManager _deviceManager;
+    WifiManager _wifiManager;
+    MqttManager _mqttManager;
+    DisplayManager _displayManager;
 
     // Private constructors & operators to enforce singleton behavior
     CoreManager() = default;
