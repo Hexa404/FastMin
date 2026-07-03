@@ -6,6 +6,7 @@ import google.generativeai as genai
 import paho.mqtt.client as mqtt
 
 import os
+import subprocess
 
 # Configuration
 MQTT_BROKER = "broker.hivemq.com"
@@ -96,6 +97,12 @@ def listen_and_process():
             response = model.generate_content(query)
             reply = response.text.strip()
             print(f"🤖 Jawaban AI: \"{reply}\"")
+
+            # Speak the reply out loud using macOS built-in TTS (non-blocking)
+            try:
+                subprocess.Popen(["say", reply])
+            except Exception as e:
+                print(f"⚠️ [TTS Error] Gagal memutar suara: {e}")
 
             # Publish to ESP32 MQTT topic
             print(f"[MQTT] Mengirim jawaban ke ESP32 di topik '{MQTT_TOPIC}'...")
