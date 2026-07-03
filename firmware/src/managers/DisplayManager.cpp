@@ -67,9 +67,19 @@ void DisplayManager::update() {
         case DisplayState::FACE_IDLE:
             renderFaceIdleScreen();
             break;
-        case DisplayState::FACE_TALKING:
-            renderFaceTalkingScreen();
+        case DisplayState::FACE_TALKING: {
+            unsigned long talkDuration = 3000;
+            if (_message1.length() > 16) {
+                talkDuration = ((_message1.length() + 4) * 300) + 1500;
+            }
+            if (millis() - _stateTimer > talkDuration) {
+                setState(DisplayState::FACE_IDLE);
+                renderFaceIdleScreen();
+            } else {
+                renderFaceTalkingScreen();
+            }
             break;
+        }
     }
 }
 
@@ -158,7 +168,16 @@ void DisplayManager::renderFaceTalkingScreen() {
     }
     
     _display.setCursor(0, 1);
-    _display.print(padString(_message1).c_str());
+    if (_message1.length() <= 16) {
+        _display.print(padString(_message1).c_str());
+    } else {
+        std::string scrollStr = _message1 + "    ";
+        unsigned long elapsed = now - _stateTimer;
+        size_t offset = (elapsed / 300) % scrollStr.length();
+        std::string doubleStr = scrollStr + scrollStr;
+        std::string visiblePart = doubleStr.substr(offset, 16);
+        _display.print(visiblePart.c_str());
+    }
 }
 
 } // namespace fastmin
